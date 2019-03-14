@@ -1,12 +1,15 @@
 const request = require('request')
+debugger
+let url = `https://maps.googleapis.com/maps/api/geocode/json?address=dekalb`+`&key=AIzaSyDfoXlNvBKQZuAsPRDALFvzqM7hnGoHt9Y`;
+
 
 const geocode = (address, callback) => {
-    const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + address + '.json?access_token=pk.eyJ1IjoiYW5kcmV3bWVhZDEiLCJhIjoiY2pvOG8ybW90MDFhazNxcnJ4OTYydzJlOSJ9.njY7HvaalLEVhEOIghPTlw&limit=1'
+    let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}`+`&key=AIzaSyDfoXlNvBKQZuAsPRDALFvzqM7hnGoHt9Y`;
 
     request({ url, json: true }, (error, { body }) => {
         if (error) {
             callback('Unable to connect to location services!', undefined)
-        } else if (body.features.length === 0) {
+        } else if (body.message||body.features.length === 0) {
             callback('Unable to find location. Try another search.', undefined)
         } else {
             callback(undefined, {
