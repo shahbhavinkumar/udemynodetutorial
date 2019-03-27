@@ -22,14 +22,14 @@ app.use(express.static(publicDirectoryPath))
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather',
-        name: 'Andrew Mead'
+        name: 'Bhavin'
     })
 })
 
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About Me',
-        name: 'Andrew Mead'
+        name: 'Bhavin'
     })
 })
 
@@ -37,7 +37,7 @@ app.get('/help', (req, res) => {
     res.render('help', {
         helpText: 'This is some helpful text.',
         title: 'Help',
-        name: 'Andrew Mead'
+        name: 'Bhavin'
     })
 })
 
@@ -48,12 +48,12 @@ app.get('/weather', (req, res) => {
         })
     }
     
-    geocode(req.query.address, (error, { latitude, longitude, location }) => {
+    geocode(req.query.address, (error, { latitude, longitude, location}={}) => {
         if (error) {
             return res.send({ error })
         }
 
-        forecast(latitude, longitude, (error, forecastData) => {
+        forecast(latitude, longitude, (forecastData, error) => {
             if (error) {
                 return res.send({ error })
             }
@@ -67,6 +67,8 @@ app.get('/weather', (req, res) => {
     })
 })
 
+
+
 app.get('/products', (req, res) => {
     if (!req.query.search) {
         return res.send({
@@ -75,6 +77,7 @@ app.get('/products', (req, res) => {
     }
 
     console.log(req.query.search)
+
     res.send({
         products: []
     })
@@ -83,7 +86,7 @@ app.get('/products', (req, res) => {
 app.get('/help/*', (req, res) => {
     res.render('404', {
         title: '404',
-        name: 'Andrew Mead',
+        name: 'Bhavin',
         errorMessage: 'Help article not found.'
     })
 })
@@ -91,7 +94,7 @@ app.get('/help/*', (req, res) => {
 app.get('*', (req, res) => {
     res.render('404', {
         title: '404',
-        name: 'Andrew Mead',
+        name: 'Bhavin',
         errorMessage: 'Page not found.'
     })
 })
