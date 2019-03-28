@@ -17,7 +17,7 @@ weatherForm.addEventListener('submit',(e)=>{
         if(data.error){
             message1.textContent="Server didnt send back a response"
         }else{
-            message1.textContent=data.location;
+            message1.textContent=data.location + " forecast is "+ data.forecast;
         }
     })
 })
